@@ -1,0 +1,48 @@
+<?php
+
+function comment_buddy() {
+    $items = array();
+    $items['comment_submitted'] = array(
+            'title' => "Alert",
+            'page callback' => 'comment_submitted',
+            'access callback' => TRUE,
+            'type' => MENU_CALLBACK,
+        );
+    $items['comment_changed'] = array(
+            'title' => "Alert",
+            'page callback' => 'comment_changed',
+            'access callback' => TRUE,
+            'type' => MENU_CALLBACK,
+        );
+    $items['comment_deleted'] = array(
+            'title' => "Alert",
+            'page callback' => 'comment_deleted',
+            'access callback' => TRUE,
+            'type' => MENU_CALLBACK,
+        );
+    return $items;
+}
+
+function comment_submitted() {
+    return '<h3>Thank you! Comment submitted!</h3>';
+}
+
+function comment_changed() {
+    return '<h3>Your comment has been changed.</h3>';
+}
+
+function comment_deleted() {
+    return '<h3>Comment deleted. Good work eating your words.</h3>'
+}
+
+comment_buddy_node_submit() {
+    $_GET['destination'] = 'comment_submitted';
+}
+
+comment_buddy_comment_update() {
+    $_GET['destination'] = 'comment_changed';
+}
+
+comment_buddy_actions_delete() {
+    $_GET['destination'] = 'comment_deleted';
+}
